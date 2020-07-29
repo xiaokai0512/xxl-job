@@ -1,10 +1,8 @@
 package com.xxl.job.core.executor.impl;
 
-import com.xxl.job.core.biz.model.ReturnT;
-import com.xxl.job.core.executor.XxlJobExecutor;
-import com.xxl.job.core.glue.GlueFactory;
-import com.xxl.job.core.handler.annotation.XxlJob;
-import com.xxl.job.core.handler.impl.MethodJobHandler;
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -15,8 +13,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.MethodIntrospector;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
-import java.lang.reflect.Method;
-import java.util.Map;
+import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.executor.XxlJobExecutor;
+import com.xxl.job.core.glue.GlueFactory;
+import com.xxl.job.core.handler.IJobHandler;
+import com.xxl.job.core.handler.annotation.JobHandler;
+import com.xxl.job.core.handler.annotation.XxlJob;
+import com.xxl.job.core.handler.impl.MethodJobHandler;
 
 
 /**
@@ -33,7 +36,7 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
     public void afterSingletonsInstantiated() {
 
         // init JobHandler Repository
-        /*initJobHandlerRepository(applicationContext);*/
+        initJobHandlerRepository(applicationContext);
 
         // init JobHandler Repository (for method)
         initJobHandlerMethodRepository(applicationContext);
@@ -56,7 +59,7 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
     }
 
 
-    /*private void initJobHandlerRepository(ApplicationContext applicationContext) {
+    private void initJobHandlerRepository(ApplicationContext applicationContext) {
         if (applicationContext == null) {
             return;
         }
@@ -76,7 +79,7 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
                 }
             }
         }
-    }*/
+    }
 
     private void initJobHandlerMethodRepository(ApplicationContext applicationContext) {
         if (applicationContext == null) {

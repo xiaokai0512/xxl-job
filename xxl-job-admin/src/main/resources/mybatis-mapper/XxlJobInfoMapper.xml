@@ -81,7 +81,7 @@
 			</if>
 		</trim>
 		ORDER BY id DESC
-		LIMIT #{offset}, #{pagesize}
+		LIMIT #{pagesize} OFFSET #{offset}
 	</select>
 
 	<select id="pageListCount" parameterType="java.util.HashMap" resultType="int">
@@ -226,4 +226,10 @@
 		WHERE id = #{id}
 	</update>
 
+	<select id="getJobsByFocusBiz" parameterType="java.util.HashMap" resultMap="XxlJobInfo">
+	    SELECT
+	    <include refid="Base_Column_List" />
+	    FROM xxl_job_info AS t
+	    WHERE t.focus_biz = #{focusBiz}
+  	</select>
 </mapper>

@@ -1,11 +1,12 @@
 package com.xxl.job.admin.service;
 
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.core.biz.model.ReturnT;
-
-import java.util.Date;
-import java.util.Map;
 
 /**
  * core job action for xxl-job
@@ -83,4 +84,5 @@ public interface XxlJobService {
 	 */
 	public ReturnT<Map<String,Object>> chartInfo(Date startDate, Date endDate);
 
+	public List<XxlJobInfo> findJobsByFocusBiz(String focusBiz);
 }

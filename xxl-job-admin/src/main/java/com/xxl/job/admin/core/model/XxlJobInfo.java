@@ -39,6 +39,7 @@ public class XxlJobInfo {
 	private long triggerLastTime;	// 上次调度时间
 	private long triggerNextTime;	// 下次调度时间
 
+	private String focusBiz; // 关注的业务
 
 	public int getId() {
 		return id;
@@ -215,4 +216,14 @@ public class XxlJobInfo {
 	public void setTriggerNextTime(long triggerNextTime) {
 		this.triggerNextTime = triggerNextTime;
 	}
+
+	public String getFocusBiz() {
+		return focusBiz;
+	}
+
+	public void setFocusBiz(String focusBiz) {
+		this.focusBiz = focusBiz;
+	}
+	
+	
 }

@@ -176,24 +176,40 @@ public class XxlJobExecutor  {
     // ---------------------- job thread repository ----------------------
     private static ConcurrentMap<Integer, JobThread> jobThreadRepository = new ConcurrentHashMap<Integer, JobThread>();
     public static JobThread registJobThread(int jobId, IJobHandler handler, String removeOldReason){
-        JobThread newJobThread = new JobThread(jobId, handler);
-        newJobThread.start();
-        logger.info(">>>>>>>>>>> xxl-job regist JobThread success, jobId:{}, handler:{}", new Object[]{jobId, handler});
+		JobThread newJobThread = jobThreadRepository.get(jobId);
+		if (null != newJobThread) {
+			return newJobThread;
+		}
 
-        JobThread oldJobThread = jobThreadRepository.put(jobId, newJobThread);	// putIfAbsent | oh my god, map's put method return the old value!!!
-        if (oldJobThread != null) {
-            oldJobThread.toStop(removeOldReason);
-            oldJobThread.interrupt();
-        }
+		synchronized (jobThreadRepository) {
+			newJobThread = jobThreadRepository.get(jobId);
+			if (null != newJobThread) {
+				return newJobThread;
+			}
 
-        return newJobThread;
+			newJobThread = new JobThread(jobId, handler);
+			newJobThread.start();
+			logger.info(">>>>>>>>>>> xxl-job regist JobThread success, jobId:{}, handler:{}",
+					new Object[] { jobId, handler });
+
+			JobThread oldJobThread = jobThreadRepository.put(jobId, newJobThread); // putIfAbsent | oh my god, map's put
+																					// method return the old value!!!
+			if (oldJobThread != null) {
+				oldJobThread.toStop(removeOldReason);
+				logger.info("interrupt old job thread");
+				oldJobThread.interrupt();
+			}
+		}
+
+		return newJobThread;
     }
     public static JobThread removeJobThread(int jobId, String removeOldReason){
         JobThread oldJobThread = jobThreadRepository.remove(jobId);
         if (oldJobThread != null) {
             oldJobThread.toStop(removeOldReason);
+            logger.info("interrupt old job thread");
             oldJobThread.interrupt();
-
+            
             return oldJobThread;
         }
         return null;

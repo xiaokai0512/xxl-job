@@ -369,4 +369,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 		return new ReturnT<Map<String, Object>>(result);
 	}
 
+	@Override
+	public List<XxlJobInfo> findJobsByFocusBiz(String focusBiz) {
+		return xxlJobInfoDao.getJobsByFocusBiz(focusBiz);
+	}
 }
