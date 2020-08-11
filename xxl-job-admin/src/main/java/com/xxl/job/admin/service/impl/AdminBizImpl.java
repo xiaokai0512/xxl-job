@@ -73,8 +73,20 @@ public class AdminBizImpl implements AdminBiz {
                 for (int i = 0; i < childJobIds.length; i++) {
                     int childJobId = (childJobIds[i]!=null && childJobIds[i].trim().length()>0 && isNumeric(childJobIds[i]))?Integer.valueOf(childJobIds[i]):-1;
                     if (childJobId > 0) {
+                      
+                        XxlJobInfo childJob = xxlJobInfoDao.loadById(childJobId);
+                        if (null == childJob) {
+                          callbackMsg += MessageFormat.format(I18nUtil.getString("jobconf_callback_child_msg2"), (i + 1),
+                              childJobIds.length, childJobIds[i]);
+                          continue;
+                        }
+            
+                        String executorParam = null;
+                        if (!StringUtils.isEmpty(log.getExecutorParam()) && (StringUtils.isEmpty(childJob.getExecutorParam()) || xxlJobInfo.isIgnoreChildParam())) {
+                          executorParam = log.getExecutorParam();
+                        }
 
-                        JobTriggerPoolHelper.trigger(childJobId, TriggerTypeEnum.PARENT, -1, null, null, null);
+                        JobTriggerPoolHelper.trigger(childJobId, TriggerTypeEnum.PARENT, -1, null, executorParam, null);
                         ReturnT<String> triggerChildResult = ReturnT.SUCCESS;
 
                         // add msg
