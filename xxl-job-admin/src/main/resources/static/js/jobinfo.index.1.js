@@ -378,9 +378,9 @@ $(function() {
 				required : true,
 				maxlength: 50
 			},
-            jobCron : {
-            	required : true
-            },
+//            jobCron : {
+//            	required : true
+//            },
 			author : {
 				required : true
 			},
@@ -395,9 +395,9 @@ $(function() {
             jobDesc : {
             	required : I18n.system_please_input + I18n.jobinfo_field_jobdesc
             },
-            jobCron : {
-            	required : I18n.system_please_input + "Cron"
-            },
+//            jobCron : {
+//            	required : I18n.system_please_input + "Cron"
+//            },
             author : {
             	required : I18n.system_please_input + I18n.jobinfo_field_author
             },
@@ -524,6 +524,8 @@ $(function() {
 		$('#updateModal .form select[name=executorBlockStrategy] option[value='+ row.executorBlockStrategy +']').prop('selected', true);
 		$('#updateModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
 
+		$("#updateModal .form input[name='focusBiz']").val( row.focusBiz );
+		
         $("#updateModal .form select[name=glueType]").change();
 
         // init-cronGen
@@ -543,9 +545,9 @@ $(function() {
 				required : true,
 				maxlength: 50
 			},
-			jobCron : {
-				required : true
-			},
+//			jobCron : {
+//				required : true
+//			},
 			author : {
 				required : true
 			},
@@ -560,9 +562,9 @@ $(function() {
 			jobDesc : {
                 required : I18n.system_please_input + I18n.jobinfo_field_jobdesc
 			},
-			jobCron : {
-				required : I18n.system_please_input + "Cron"
-			},
+//			jobCron : {
+//				required : I18n.system_please_input + "Cron"
+//			},
 			author : {
 				required : I18n.system_please_input + I18n.jobinfo_field_author
 			},
@@ -669,6 +671,8 @@ $(function() {
 		$('#addModal .form select[name=executorBlockStrategy] option[value='+ row.executorBlockStrategy +']').prop('selected', true);
 		$('#addModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
 
+		$("#addModal .form input[name='focusBiz']").val( row.focusBiz );
+		
 		$("#addModal .form select[name=glueType]").change();
 
 		// init-cronGen

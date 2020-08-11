@@ -127,16 +127,11 @@
                         <div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" maxlength="50" ></div>
 					</div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="red">*</font></label>
-                        <div class="col-sm-4">
-                            <select class="form-control" name="executorRouteStrategy" >
-							<#list ExecutorRouteStrategyEnum as item>
-                                <option value="${item}" >${item.title}</option>
-							</#list>
-                            </select>
-                        </div>
-                        <label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">Cron<font color="#FFCC66">*</font></label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+                        
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_focus_biz}<font color="#FFCC66">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="focusBiz" placeholder="Kafka消息的Key" maxlength="128" ></div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
@@ -159,23 +154,34 @@
                                 </#list>
                             </select>
                         </div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}<font color="black">*</font></label>
-                        <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                        
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="red">*</font></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="executorRouteStrategy" >
+							<#list ExecutorRouteStrategyEnum as item>
+                                <option value="${item}" >${item.title}</option>
+							</#list>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="${I18n.jobinfo_field_executorTimeout_placeholder}" maxlength="6" ></div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="${I18n.jobinfo_field_executorFailRetryCount_placeholder}" maxlength="4" ></div>
                     </div>
 					<div class="form-group">
                         <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_author}<font color="red">*</font></label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" maxlength="50" ></div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="${I18n.jobinfo_field_alarmemail_placeholder}" maxlength="100" ></div>
 					</div>
+					<div class="form-group">
+                    	<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                    </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}</label>
                         <div class="col-sm-10">
                             <textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 						</div>
@@ -323,16 +329,11 @@ exit 0
                         <div class="col-sm-4"><input type="text" class="form-control" name="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" maxlength="50" ></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="red">*</font></label>
-                        <div class="col-sm-4">
-                            <select class="form-control" name="executorRouteStrategy" >
-							<#list ExecutorRouteStrategyEnum as item>
-                                <option value="${item}" >${item.title}</option>
-							</#list>
-                            </select>
-                        </div>
-                        <label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">Cron<font color="#FFCC66">*</font></label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+                        
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_focus_biz}<font color="#FFCC66">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="focusBiz" placeholder="Kafka消息的Key" maxlength="128" ></div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
@@ -355,23 +356,33 @@ exit 0
 							</#list>
                             </select>
                         </div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}<font color="black">*</font></label>
-                        <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorRouteStrategy}<font color="red">*</font></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="executorRouteStrategy" >
+							<#list ExecutorRouteStrategyEnum as item>
+                                <option value="${item}" >${item.title}</option>
+							</#list>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_timeout}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="executorTimeout" placeholder="${I18n.jobinfo_field_executorTimeout_placeholder}" maxlength="6" ></div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorFailRetryCount}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="executorFailRetryCount" placeholder="${I18n.jobinfo_field_executorFailRetryCount_placeholder}" maxlength="4" ></div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_author}<font color="red">*</font></label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" maxlength="50" ></div>
-                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}<font color="black">*</font></label>
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_alarmemail}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="alarmEmail" placeholder="${I18n.jobinfo_field_alarmemail_placeholder}" maxlength="100" ></div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+                    	<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}</label>
                         <div class="col-sm-10">
                             <textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
 						</div>
@@ -402,13 +413,13 @@ exit 0
             <div class="modal-body">
                 <form class="form-horizontal form" role="form" >
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}<font color="black">*</font></label>
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}</label>
                         <div class="col-sm-10">
                             <textarea class="textarea form-control" name="executorParam" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_executorparam}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobgroup_field_registryList}<font color="black">*</font></label>
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobgroup_field_registryList}</label>
                         <div class="col-sm-10">
                             <textarea class="textarea form-control" name="addressList" placeholder="${I18n.jobinfo_opt_run_tips}" maxlength="512" style="height: 63px; line-height: 1.2;"></textarea>
                         </div>

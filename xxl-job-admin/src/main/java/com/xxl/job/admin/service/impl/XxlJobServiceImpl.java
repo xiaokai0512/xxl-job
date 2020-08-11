@@ -13,6 +13,7 @@ import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.glue.GlueTypeEnum;
 import com.xxl.job.core.util.DateUtil;
+import io.micrometer.core.instrument.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -58,13 +59,24 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 	@Override
 	public ReturnT<String> add(XxlJobInfo jobInfo) {
-		// valid
+    // valid
+    boolean emptyTriger = true;
+    if (StringUtils.isNotBlank(jobInfo.getJobCron())) {
+      if (CronExpression.isValidExpression(jobInfo.getJobCron())) {
+        emptyTriger = false;
+      } else {
+        return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_cron_unvalid"));
+      }
+    }
+    if (StringUtils.isNotBlank(jobInfo.getFocusBiz())) {
+      emptyTriger = false;
+    }
+    if (emptyTriger) {
+      return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_triger_unvalid"));
+    }
 		XxlJobGroup group = xxlJobGroupDao.load(jobInfo.getJobGroup());
 		if (group == null) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_choose")+I18nUtil.getString("jobinfo_field_jobgroup")) );
-		}
-		if (!CronExpression.isValidExpression(jobInfo.getJobCron())) {
-			return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_cron_unvalid") );
 		}
 		if (jobInfo.getJobDesc()==null || jobInfo.getJobDesc().trim().length()==0) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_jobdesc")) );
@@ -140,10 +152,21 @@ public class XxlJobServiceImpl implements XxlJobService {
 	@Override
 	public ReturnT<String> update(XxlJobInfo jobInfo) {
 
-		// valid
-		if (!CronExpression.isValidExpression(jobInfo.getJobCron())) {
-			return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_cron_unvalid") );
-		}
+    // valid
+    boolean emptyTriger = true;
+    if (StringUtils.isNotBlank(jobInfo.getJobCron())) {
+      if (CronExpression.isValidExpression(jobInfo.getJobCron())) {
+        emptyTriger = false;
+      } else {
+        return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_cron_unvalid"));
+      }
+    }
+    if (StringUtils.isNotBlank(jobInfo.getFocusBiz())) {
+      emptyTriger = false;
+    }
+    if (emptyTriger) {
+      return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobinfo_field_triger_unvalid"));
+    }
 		if (jobInfo.getJobDesc()==null || jobInfo.getJobDesc().trim().length()==0) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("system_please_input")+I18nUtil.getString("jobinfo_field_jobdesc")) );
 		}
@@ -223,6 +246,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 		exists_jobInfo.setExecutorFailRetryCount(jobInfo.getExecutorFailRetryCount());
 		exists_jobInfo.setChildJobId(jobInfo.getChildJobId());
 		exists_jobInfo.setTriggerNextTime(nextTriggerTime);
+		exists_jobInfo.setFocusBiz(jobInfo.getFocusBiz());
 
 		exists_jobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(exists_jobInfo);
