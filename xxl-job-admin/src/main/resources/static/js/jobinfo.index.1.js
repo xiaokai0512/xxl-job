@@ -525,6 +525,7 @@ $(function() {
 		$('#updateModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
 
 		$("#updateModal .form input[name='focusBiz']").val( row.focusBiz );
+		$('#updateModal .form select[name=ignoreChildParam] option[value='+ row.ignoreChildParam +']').prop('selected', true);
 		
         $("#updateModal .form select[name=glueType]").change();
 
@@ -672,6 +673,7 @@ $(function() {
 		$('#addModal .form select[name=glueType] option[value='+ row.glueType +']').prop('selected', true);
 
 		$("#addModal .form input[name='focusBiz']").val( row.focusBiz );
+		$('#addModal .form select[name=ignoreChildParam] option[value='+ row.ignoreChildParam +']').prop('selected', true);
 		
 		$("#addModal .form select[name=glueType]").change();
 

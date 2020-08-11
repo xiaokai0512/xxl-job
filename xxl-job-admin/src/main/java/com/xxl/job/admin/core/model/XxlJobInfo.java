@@ -40,6 +40,8 @@ public class XxlJobInfo {
 	private long triggerNextTime;	// 下次调度时间
 
 	private String focusBiz; // 关注的业务
+	
+	private boolean ignoreChildParam; // 为true时，如果本次执行有参数，则使用此参数，忽略子任务上的参数
 
 	public int getId() {
 		return id;
@@ -224,6 +226,14 @@ public class XxlJobInfo {
 	public void setFocusBiz(String focusBiz) {
 		this.focusBiz = focusBiz;
 	}
+
+        public boolean isIgnoreChildParam() {
+          return ignoreChildParam;
+        }
+      
+        public void setIgnoreChildParam(boolean ignoreChildParam) {
+          this.ignoreChildParam = ignoreChildParam;
+        }
 	
 	
 }

@@ -179,6 +179,14 @@
 					<div class="form-group">
                     	<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                        
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_ignore_child_param}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="ignoreChildParam" >
+                                <option value="false" >FALSE</option>
+                                <option value="true" >TRUE</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}</label>
@@ -380,6 +388,14 @@ exit 0
                     <div class="form-group">
                     	<label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}</label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                        
+                        <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_ignore_child_param}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="ignoreChildParam" >
+                                <option value="false" >FALSE</option>
+                                <option value="true" >TRUE</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_executorparam}</label>

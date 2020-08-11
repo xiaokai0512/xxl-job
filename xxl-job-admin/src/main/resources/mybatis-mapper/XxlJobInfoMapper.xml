@@ -35,6 +35,7 @@
 		<result column="trigger_next_time" property="triggerNextTime" />
         
         <result column="focus_biz" property = "focusBiz" />
+        <result column="ignore_child_param" property = "ignoreChildParam" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -60,7 +61,8 @@
 		t.trigger_status,
 		t.trigger_last_time,
 		t.trigger_next_time,
-        t.focus_biz
+        t.focus_biz,
+        t.ignore_child_param
 	</sql>
 
 	<select id="pageList" parameterType="java.util.HashMap" resultMap="XxlJobInfo">
@@ -132,7 +134,8 @@
 			trigger_status,
 			trigger_last_time,
 			trigger_next_time,
-            focus_biz
+            focus_biz,
+            ignore_child_param
 		) VALUES (
 			#{jobGroup},
 			#{jobCron},
@@ -155,7 +158,8 @@
 			#{triggerStatus},
 			#{triggerLastTime},
 			#{triggerNextTime},
-            #{focusBiz}
+            #{focusBiz},
+            #{ignoreChildParam}
 		);
 		<!--<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
@@ -192,7 +196,8 @@
 			trigger_status = #{triggerStatus},
 			trigger_last_time = #{triggerLastTime},
 			trigger_next_time = #{triggerNextTime},
-            focus_biz = #{focusBiz}
+            focus_biz = #{focusBiz},
+            ignore_child_param = #{ignoreChildParam}
 		WHERE id = #{id}
 	</update>
 

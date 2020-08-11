@@ -82,7 +82,7 @@ public class AdminBizImpl implements AdminBiz {
                         }
             
                         String executorParam = null;
-                        if (StringUtils.isEmpty(childJob.getExecutorParam()) && !StringUtils.isEmpty(log.getExecutorParam())) {
+                        if (!StringUtils.isEmpty(log.getExecutorParam()) && (StringUtils.isEmpty(childJob.getExecutorParam()) || xxlJobInfo.isIgnoreChildParam())) {
                           executorParam = log.getExecutorParam();
                         }
 

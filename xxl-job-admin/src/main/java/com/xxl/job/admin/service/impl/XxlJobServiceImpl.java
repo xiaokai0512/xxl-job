@@ -247,6 +247,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 		exists_jobInfo.setChildJobId(jobInfo.getChildJobId());
 		exists_jobInfo.setTriggerNextTime(nextTriggerTime);
 		exists_jobInfo.setFocusBiz(jobInfo.getFocusBiz());
+		exists_jobInfo.setIgnoreChildParam(jobInfo.isIgnoreChildParam());
 
 		exists_jobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(exists_jobInfo);
