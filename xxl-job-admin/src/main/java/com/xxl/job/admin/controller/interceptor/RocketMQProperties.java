@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 @Configuration
-@ConfigurationProperties(prefix = "aliyun.rocketmq.consumer")
+@ConfigurationProperties(prefix = "aliyun.rocketmq")
 public class RocketMQProperties {
   private String topic;
 
