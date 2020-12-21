@@ -44,7 +44,7 @@ public class RocketMqConsumer implements InitializingBean {
             List<XxlJobInfo> jobs = xxlJobService.findJobsByFocusBiz(message.getKey());
             for (XxlJobInfo job : jobs) {
               JobTriggerPoolHelper.trigger(job.getId(), TriggerTypeEnum.MANUAL, -1, null,
-                  emptyValue ? job.getExecutorParam() : jsonStr, null);
+                  emptyValue ? job.getExecutorParam() : jsonStr, null, null);
             }
             return OrderAction.Success;
           }

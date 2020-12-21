@@ -33,6 +33,10 @@ public class XxlJobLog {
 
 	// alarm info
 	private int alarmStatus;
+	
+	private String triggerUuid;
+	
+	private int executorShardingTotal;
 
 	public long getId() {
 		return id;
@@ -154,4 +158,20 @@ public class XxlJobLog {
 		this.alarmStatus = alarmStatus;
 	}
 
+  public String getTriggerUuid() {
+    return triggerUuid;
+  }
+
+  public void setTriggerUuid(String triggerUuid) {
+    this.triggerUuid = triggerUuid;
+  }
+
+  public int getExecutorShardingTotal() {
+    return executorShardingTotal;
+  }
+
+  public void setExecutorShardingTotal(int executorShardingTotal) {
+    this.executorShardingTotal = executorShardingTotal;
+  }
+	
 }

@@ -36,7 +36,7 @@ public class Consumer {
 				List<XxlJobInfo> jobs = xxlJobService.findJobsByFocusBiz(key);
 				for (XxlJobInfo job : jobs) {
 					JobTriggerPoolHelper.trigger(job.getId(), TriggerTypeEnum.MANUAL, -1, null,
-							emptyValue ? job.getExecutorParam() : value, null);
+							emptyValue ? job.getExecutorParam() : value, null, null);
 				}
 			} catch (Exception e) {
 				logger.error("${xxl-job.topic}", e);

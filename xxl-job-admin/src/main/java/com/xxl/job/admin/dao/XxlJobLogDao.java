@@ -58,5 +58,7 @@ public interface XxlJobLogDao {
 								 @Param("newAlarmStatus") int newAlarmStatus);
 
 	public List<Long> findLostJobIds(@Param("losedTime") Date losedTime);
+	
+	public List<XxlJobLog> findByTriggerUuid(@Param("triggerUuid") String triggerUuid, @Param("jobId") int jobId);
 
 }

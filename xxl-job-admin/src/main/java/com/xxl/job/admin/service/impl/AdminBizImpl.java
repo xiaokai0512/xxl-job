@@ -51,6 +51,36 @@ public class AdminBizImpl implements AdminBiz {
 
         return ReturnT.SUCCESS;
     }
+    
+    private boolean checkSharding(XxlJobLog log) {
+      if (null == log.getExecutorShardingParam() || null == log.getTriggerUuid()) {
+        logger.info("==== 1");
+        // 没有分片参数，或者之前的任务没有uuid，直接执行子任务
+        return true;
+      }
+      
+      int total = log.getExecutorShardingTotal();
+      if (total <= 1) {
+        // 单节点执行的
+        return true;
+      }
+
+      List<XxlJobLog> logs = xxlJobLogDao.findByTriggerUuid(log.getTriggerUuid(), log.getJobId());
+      logs.forEach(l -> {
+        logger.info("=== {}", l.getId());
+      });
+      if (null != logs
+          && logs.stream().filter(l -> l.getId() != log.getId() && l.getHandleCode() == ReturnT.SUCCESS_CODE)
+              .count() == total - 1) {
+        // 检查除当前日志外的其他日志，是否都成功，是否与分片数一致
+        // 当前日志不成功的话不会进此方法
+        logger.info("==== 2");
+        return true;
+      }
+  
+      logger.info("==== 4");
+      return false;
+    }
 
     private ReturnT<String> callback(HandleCallbackParam handleCallbackParam) {
         // valid log item
@@ -67,6 +97,7 @@ public class AdminBizImpl implements AdminBiz {
         if (IJobHandler.SUCCESS.getCode() == handleCallbackParam.getExecuteResult().getCode()) {
             XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(log.getJobId());
             if (xxlJobInfo!=null && xxlJobInfo.getChildJobId()!=null && xxlJobInfo.getChildJobId().trim().length()>0) {
+              if (checkSharding(log)) {
                 callbackMsg = "<br><br><span style=\"color:#00c0ef;\" > >>>>>>>>>>>"+ I18nUtil.getString("jobconf_trigger_child_run") +"<<<<<<<<<<< </span><br>";
 
                 String[] childJobIds = xxlJobInfo.getChildJobId().split(",");
@@ -86,7 +117,7 @@ public class AdminBizImpl implements AdminBiz {
                           executorParam = log.getExecutorParam();
                         }
 
-                        JobTriggerPoolHelper.trigger(childJobId, TriggerTypeEnum.PARENT, -1, null, executorParam, null);
+                        JobTriggerPoolHelper.trigger(childJobId, TriggerTypeEnum.PARENT, -1, null, executorParam, null, log.getTriggerUuid());
                         ReturnT<String> triggerChildResult = ReturnT.SUCCESS;
 
                         // add msg
@@ -104,7 +135,10 @@ public class AdminBizImpl implements AdminBiz {
                     }
                 }
 
-            }
+              } else {
+                callbackMsg = "分片任务没有全部完成，本次不触发子任务。";
+              }
+            } 
         }
 
         // handle msg
